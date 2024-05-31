@@ -31,6 +31,7 @@ class MahasiswaController extends Controller
         $data = $request->validate([
             'nama' => 'required|string',
             'nim' => 'required|unique:mahasiswas,nim',
+            'tgl_lahir' => 'required|date',
             'jurusan' => 'required'
         ]);
 
@@ -63,6 +64,7 @@ class MahasiswaController extends Controller
         $data = $request->validate([
             'nama' => 'required|string',
             'nim' => "required|unique:mahasiswas,nim,$mahasiswa->id",
+            'tgl_lahir' => "required|date",
             'jurusan' => "required",
         ]);
 

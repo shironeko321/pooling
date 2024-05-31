@@ -41,13 +41,17 @@
                   placeholder="NIM" value="{{ old('nim') }}">
               </div>
               <div class="form-group">
+                <label for="tgl_lahir">Tanggal Lahir</label>
+                <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir"
+                  placeholder="Tanggal lahir" value="{{ old('tgl_lahir') }}">
+              </div>
+              <div class="form-group">
                 <label for="jurusan">Jurusan</label>
                 <input type="text" name="jurusan" class="form-control" id="jurusan"
                   placeholder="Jurusan" value="{{ old('jurusan') }}">
               </div>
             </div>
             <!-- /.card-body -->
-
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Tambah</button>
             </div>

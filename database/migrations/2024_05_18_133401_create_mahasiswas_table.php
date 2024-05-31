@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nim')->unique();
             $table->string('nama');
+            $table->date('tgl_lahir');
             $table->string('jurusan');
             $table->timestamps();
         });

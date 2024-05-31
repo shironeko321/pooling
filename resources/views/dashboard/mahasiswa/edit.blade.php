@@ -42,6 +42,11 @@
                   placeholder="NIM" value="{{ $data->nim }}">
               </div>
               <div class="form-group">
+                <label for="tgl_lahir">Tanggal Lahir</label>
+                <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir"
+                  placeholder="Tanggal lahir" value="{{ $data->tgl_lahir  }}">
+              </div>
+              <div class="form-group">
                 <label for="jurusan">Jurusan</label>
                 <input type="text" name="jurusan" class="form-control" id="jurusan"
                   placeholder="Jurusan" value="{{ $data->jurusan }}">

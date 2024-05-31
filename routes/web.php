@@ -22,22 +22,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('ayopilih')->group(function () {
-    Route::get('/', [HomeController::class, 'login'])->name('ayopilih.login');
-    Route::post('/auth', [HomeController::class, 'auth'])->name('ayopilih.auth');
-    Route::get('/waktu-pemilihan', [HomeController::class, 'waktuPemilihan'])->name('ayopilih.time');
+Route::get('/', [HomeController::class, 'login'])->name('ayopilih.login');
+Route::post('/auth', [HomeController::class, 'auth'])->name('ayopilih.auth');
+Route::get('/waktu-pemilihan', [HomeController::class, 'waktuPemilihan'])->name('ayopilih.time');
 
-    Route::middleware([Pemilih::class, WaktuPemilihan::class])->group(function () {
-        Route::get('/home', [HomeController::class, 'ayopilih'])->name('ayopilih');
-        Route::get('/detail/calon/{calon}', [HomeController::class, 'detail'])->name('detailcalon');
-        Route::post('/pilih', [HomeController::class, 'pilih'])->name('pilih');
+Route::middleware([Pemilih::class, WaktuPemilihan::class])->group(function () {
+    Route::get('/home', [HomeController::class, 'ayopilih'])->name('ayopilih');
+    Route::get('/detail/calon/{calon}', [HomeController::class, 'detail'])->name('detailcalon');
+    Route::post('/pilih', [HomeController::class, 'pilih'])->name('pilih');
 
-        Route::post('/logout', [HomeController::class, 'logout'])->name('ayopilih.logout');
-    });
+    Route::post('/logout', [HomeController::class, 'logout'])->name('ayopilih.logout');
 });
 
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('panel')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 
