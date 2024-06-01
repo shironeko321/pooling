@@ -37,8 +37,8 @@ class CalonController extends Controller
         } else {
             $data = $request->validate([
                 'gambar' => 'required|image',
-                'ketua_id' => 'required|unique:calons,id|different:wakil_ketua_id',
-                'wakil_ketua_id' => 'required|unique:calons,id|different:ketua_id',
+                'ketua_id' => 'required|unique:calons,ketua_id|different:wakil_ketua_id',
+                'wakil_ketua_id' => 'required|unique:calons,wakil_ketua_id|different:ketua_id',
                 'visi' => 'required',
                 'misi' => 'required',
             ]);

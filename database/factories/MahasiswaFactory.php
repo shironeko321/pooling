@@ -18,7 +18,7 @@ class MahasiswaFactory extends Factory
     {
         return [
             'nama' => fake()->name(),
-            'nim' => fake()->randomNumber(),
+            'nim' => fake()->unique()->randomNumber(),
             'tgl_lahir' => fake()->date(),
             'jurusan' => fake()->city()
         ];

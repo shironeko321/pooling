@@ -21,6 +21,10 @@ class HomeController extends Controller
         $buka = Carbon::parse($pengaturan->buka_poling);
         $tutup = Carbon::parse($pengaturan->tutup_poling);
 
+        if ($now->gt($buka) && $now->lt($tutup)) {
+            return redirect()->route('ayopilih.login');
+        }
+
         // jika waktu sekarang lebih dari buka dan kurang dari tutup
         if ($now->lt($buka)) {
             $data['msg'] = "Pemilihan Belum dimulai";
@@ -84,9 +88,19 @@ class HomeController extends Controller
     {
         $data = $request->validate([
             'nim' => 'required|string|exists:mahasiswas,nim',
+            'tgl_lahir' => 'required|date',
         ]);
 
-        $user = Mahasiswa::where('nim', $data['nim'])->first();
+        $user = Mahasiswa::where([
+            ['nim', $data['nim']],
+            ['tgl_lahir', $data['tgl_lahir']]
+        ])->first();
+
+        if ($user == null) {
+            return redirect()->back()->withErrors([
+                "msg" => "Akun Mahasiswa Tidak Tersedia"
+            ]);
+        }
 
         Auth::guard('mahasiswa')->loginUsingId($user->id);
         $request->session()->regenerate();
