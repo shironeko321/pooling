@@ -43,11 +43,23 @@ class CalonController extends Controller
                 'misi' => 'required',
             ]);
 
-            $gambar = $request->file('gambar');
-            $path = $gambar->store("public/images");
-            $path = str_replace("public/images/", "", $path);
+            // $gambar = $request->file('gambar');
 
-            $data['gambar'] = $path;
+
+            // $file = $request->file('gambar');
+            // $path = $file->store('images', ['disk' => 'public_uploads']);
+
+            $imageName = time() . '.' . $request->gambar->getClientOriginalExtension();
+            $request->gambar->move(public_path('images'), $imageName);
+            // $path = $request->file('file')->storeAs('public', 'your_file_name.ext');
+            // dd($file_content);
+            // if (!Storage::disk('public_uploads')->put('', $file_content)) {
+            //     return false;
+            // }
+
+            // $path = $gambar->store("public/images");
+            // $path = str_replace("public/images/", "", $path);
+            $data['gambar'] = $imageName;
         }
 
         Calon::create($data);
@@ -83,12 +95,15 @@ class CalonController extends Controller
             'misi' => 'required',
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $gambar = $request->file('gambar');
-            $path = $gambar->store("public/images");
-            $path = str_replace("public/images/", "", $path);
 
-            $data['gambar'] = $path;
+        if ($request->hasFile('gambar')) {
+            // $gambar = $request->file('gambar');
+            // $path = $gambar->store("public/images");
+            // $path = str_replace("public/images/", "", $path);
+            $imageName = time() . '.' . $request->gambar->getClientOriginalExtension();
+            $request->gambar->move(public_path('images'), $imageName);
+
+            $data['gambar'] = $imageName;
         }
 
         $calon->update($data);
@@ -101,7 +116,8 @@ class CalonController extends Controller
      */
     public function destroy(Calon $calon)
     {
-        Storage::delete("public/images/$calon->gambar");
+        $path = public_path('images');
+        Storage::delete($path . "$calon->gambar");
         $calon->delete();
 
         return redirect()->route('calon.index')->with('msg', 'Berhasil Hapus Calon');
